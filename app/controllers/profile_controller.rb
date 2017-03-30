@@ -18,10 +18,10 @@ class ProfileController < ApplicationController
   end
 
   def download_vpn
-    if !Pathname.new("/opt/vpnkeys/#{current_user.email}.tar.gz").exist?
-      `cd /etc/openvpn/easy-rsa/ && bash /etc/openvpn/easy-rsa/gen-client-keys #{current_user.email}`
+    if !Pathname.new("/tmp/#{current_user.email}.tblk.tar.gz").exist?
+      `cd  /etc/openvpn/easy-rsa && /etc/openvpn/easy-rsa/gen-client-keys #{current_user.email}`
     end
-    send_file ("/opt/vpnkeys/#{current_user.email}.tar.gz")
+    send_file ("/tmp/#{current_user.email}.tblk.tar.gz")
   end
 
   def authenticate

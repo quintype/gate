@@ -1,18 +1,11 @@
 default: &default
-  adapter: mysql
+  adapter: sqlite3
   pool: 5
   timeout: 5000
-  username: mysql
-  password: mysql
 
 development:
   <<: *default
-  database: gate
-  host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %>
-  properties:
-    useSSL: false
-
+  database: db/development.sqlite3
 test:
   <<: *default
   database: gate
@@ -22,8 +15,11 @@ test:
     useSSL: false
 
 production:
-  host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %>
-  database: <%= ENV['DB_NAME'] %>
-  username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  <<: *default
+  database: db/production.sqlite3
+#production:
+#  host: <%= ENV['DB_HOST'] %>
+#  port: <%= ENV['DB_PORT'] %>
+#  database: <%= ENV['DB_NAME'] %>
+#  username: <%= ENV['DB_USER'] %>
+#  password: <%= ENV['DB_PASSWORD'] %>
