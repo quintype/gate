@@ -7,7 +7,7 @@ gem "paranoia"
 platform :ruby do
   gem 'sqlite3'
 end
-
+gem 'mysql'
 gem 'mysql2', platform: :ruby
 platform :jruby do
   gem 'jdbc-mysql'

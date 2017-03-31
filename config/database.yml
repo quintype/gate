@@ -14,12 +14,15 @@ test:
   properties:
     useSSL: false
 
-production:
-  <<: *default
-  database: db/production.sqlite3
 #production:
-#  host: <%= ENV['DB_HOST'] %>
-#  port: <%= ENV['DB_PORT'] %>
-#  database: <%= ENV['DB_NAME'] %>
-#  username: <%= ENV['DB_USER'] %>
-#  password: <%= ENV['DB_PASSWORD'] %>
+#  <<: *default
+#  database: db/production.sqlite3
+production:
+  adapter: mysql
+  pool: 5
+  timeout: 5000
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
