@@ -18,13 +18,15 @@ class ProfileController < ApplicationController
   end
 
   def download_vpn
-    if !Pathname.new("/tmp/#{current_user.email}.tblk.tar.gz").exist?
-      `cd  /etc/openvpn/easy-rsa && /etc/openvpn/easy-rsa/gen-client-keys #{current_user.email}`
+    if !Pathname.new("/opt/gate/keys/#{current_user.email}.tblk.tar.gz").exist?
+      `/opt/gate/gen-client-keys #{current_user.email}`
     end
-    send_file ("/tmp/#{current_user.email}.tblk.tar.gz")
+    send_file ("/opt/gate/keys/#{current_user.email}.tblk.tar.gz")
   end
 
   def authenticate
+    Rails.logger.info("in authenticate module")
+    Rails.logger.info params
     response = User.authenticate params
     if response
       render text: 0
@@ -34,6 +36,8 @@ class ProfileController < ApplicationController
   end
 
   def authenticate_pam
+    Rails.logger.info("in authenticate_pam module")
+    Rails.logger.info params
     response = User.authenticate_pam params
     if response
       render text: 0
